@@ -1,4 +1,4 @@
-package com.ksobkowiak.shoppingapp;
+package com.ksobkowiak.shoppingapp.model;
 
 public class Greeting {
 
