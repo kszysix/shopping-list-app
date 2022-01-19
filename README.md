@@ -6,7 +6,7 @@
   
   b. Użytkownik może dodać lub usunąć listę zakupów
   
-  c. Użytkownik może dodać, usunąć lub odznaczyć produkt z listy
+  c. Użytkownik może dodać lub usunąć produkt z listy
   
   d. Użytkownik może dodać kwotę za którą kupił daną listę
   
@@ -42,7 +42,7 @@
 
   a. Backend - Java + Spring
   
-  b. Frontend - React
+  b. Frontend - JavaScript + React
   
   c. Baza danych - Postgres
   
