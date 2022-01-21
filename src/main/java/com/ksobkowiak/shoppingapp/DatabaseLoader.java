@@ -1,8 +1,6 @@
 package com.ksobkowiak.shoppingapp;
 
-import com.ksobkowiak.shoppingapp.model.Employee;
 import com.ksobkowiak.shoppingapp.model.Item;
-import com.ksobkowiak.shoppingapp.repository.EmployeeRepository;
 import com.ksobkowiak.shoppingapp.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

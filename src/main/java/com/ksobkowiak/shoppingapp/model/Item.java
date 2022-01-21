@@ -1,8 +1,6 @@
 package com.ksobkowiak.shoppingapp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Item {
@@ -12,11 +10,21 @@ public class Item {
     private long id;
     private String content;
 
-    public Item() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="listId")
+    private ShoppingList shoppingList;
+
+    public Item(String content, ShoppingList shoppingList) {
+        this.shoppingList = shoppingList;
+        this.content = content;
     }
 
     public Item(String content) {
-        this.content = content;
+        this(content, null);
+    }
+
+    public Item() {
+        this("N/D");
     }
 
     public long getId() {
