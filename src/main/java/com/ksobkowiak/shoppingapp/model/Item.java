@@ -3,6 +3,7 @@ package com.ksobkowiak.shoppingapp.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "item")
 public class Item {
 
     @Id
@@ -10,21 +11,10 @@ public class Item {
     private long id;
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="listId")
-    private ShoppingList shoppingList;
-
-    public Item(String content, ShoppingList shoppingList) {
-        this.shoppingList = shoppingList;
-        this.content = content;
-    }
+    public Item(){}
 
     public Item(String content) {
-        this(content, null);
-    }
-
-    public Item() {
-        this("N/D");
+        this.content = content;
     }
 
     public long getId() {
