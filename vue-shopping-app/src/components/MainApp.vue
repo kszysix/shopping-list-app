@@ -1,16 +1,15 @@
 <template>
   <div>
-    Main App
-    <ItemsList></ItemsList>
+    <ListsList></ListsList>
   </div>
 
 </template>
 <script>
-import ItemsList from "@/components/ItemsList";
+import ListsList from "@/components/ListsList";
 
 export default {
   name: "MainApp",
-  components: {ItemsList}
+  components: {ListsList}
 }
 </script>
 <style scoped>

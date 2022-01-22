@@ -4,6 +4,7 @@ import com.ksobkowiak.shoppingapp.mapper.ItemMapper;
 import com.ksobkowiak.shoppingapp.model.Item;
 import com.ksobkowiak.shoppingapp.dto.ItemDTO;
 import com.ksobkowiak.shoppingapp.service.ItemService;
+import com.ksobkowiak.shoppingapp.service.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/item")
 public class ItemRestController {
+
+    @Autowired
+    private ShoppingListService shoppingListService;
 
     @Autowired
     private ItemService itemService;
@@ -35,12 +39,12 @@ public class ItemRestController {
         }
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Void> create(@RequestBody ItemDTO itemDto) {
+    @PostMapping("/{listId}")
+    public ResponseEntity<Void> create(@PathVariable("listId") Integer listId,@RequestBody ItemDTO itemDto) {
         try {
-            itemService.save(
-                    itemMapper.itemDTOToItem(itemDto)
-            );
+            Item item = itemMapper.itemDTOToItem(itemDto);
+            item.setShoppingList(shoppingListService.find(listId));
+            itemService.save(item);
             return new ResponseEntity<>(null, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,7 +80,7 @@ public class ItemRestController {
             Item itemEntity = itemService.find(id);
             if (itemEntity == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            } //if
+            }
             itemService.delete(id);
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         } catch (Exception e) {

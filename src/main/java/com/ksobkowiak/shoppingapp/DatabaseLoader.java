@@ -1,7 +1,9 @@
 package com.ksobkowiak.shoppingapp;
 
 import com.ksobkowiak.shoppingapp.model.Item;
+import com.ksobkowiak.shoppingapp.model.ShoppingList;
 import com.ksobkowiak.shoppingapp.repository.ItemRepository;
+import com.ksobkowiak.shoppingapp.repository.ShoppingListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -9,11 +11,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-    private final ItemRepository repository;
+    private final ItemRepository itemRepository;
+    private final ShoppingListRepository shoppingListRepository;
 
     @Autowired
-    public DatabaseLoader(ItemRepository repository) {
-        this.repository = repository;
+    public DatabaseLoader(ItemRepository itemRepository, ShoppingListRepository shoppingListRepository) {
+        this.itemRepository = itemRepository;
+        this.shoppingListRepository = shoppingListRepository;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.ksobkowiak.shoppingapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,10 @@ public class Item {
     @GeneratedValue
     private long id;
     private String content;
+    @ManyToOne
+    @JoinColumn(name = "fk_list")
+    @JsonBackReference
+    private ShoppingList shoppingList;
 
     public Item(){}
 
@@ -21,7 +27,7 @@ public class Item {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -31,5 +37,13 @@ public class Item {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public ShoppingList getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(ShoppingList shoppingList) {
+        this.shoppingList = shoppingList;
     }
 }

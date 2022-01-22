@@ -1,6 +1,10 @@
 package com.ksobkowiak.shoppingapp.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class ShoppingList {
@@ -11,16 +15,20 @@ public class ShoppingList {
     private String name;
     private long price;
 
-//    @OneToMany(cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY,
-//            mappedBy = "shoppingList")
-//    private List<Item> items = new ArrayList<>();
+    @OneToMany(mappedBy = "shoppingList", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Item> items = new ArrayList<Item>();
 
     public ShoppingList() {
     }
 
     public ShoppingList(String name) {
         this.name = name;
+    }
+
+    public ShoppingList(String name, long price) {
+        this.name = name;
+        this.price = price;
     }
 
     public long getId() {
@@ -45,5 +53,13 @@ public class ShoppingList {
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

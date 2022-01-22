@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = { "http://localhost:8081"})
+@CrossOrigin(origins = {"http://localhost:8081"})
 @RestController
 @RequestMapping("/api/v1/list")
 public class ShoppingListRestController {
@@ -30,6 +30,18 @@ public class ShoppingListRestController {
                     shoppingListMapper.map(
                             shoppingListService.listAll()
                     ),
+                    HttpStatus.OK
+            );
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/{id}/items")
+    public ResponseEntity<ShoppingList> getListItems(@PathVariable("id") Integer id) {
+        try {
+            return new ResponseEntity<>(
+                    shoppingListService.find(id), //.getItems(),
                     HttpStatus.OK
             );
         } catch (Exception e) {
@@ -78,7 +90,7 @@ public class ShoppingListRestController {
             ShoppingList shoppingListEntity = shoppingListService.find(id);
             if (shoppingListEntity == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            } //if
+            }
             shoppingListService.delete(id);
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         } catch (Exception e) {
