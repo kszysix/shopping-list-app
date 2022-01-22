@@ -1,3 +1,5 @@
+Link do repo - https://github.com/kszysix/shopping-list-app
+
 1. Wymagania fukcjonalne:
 
   a. Użytkownik może utworzyć konto
