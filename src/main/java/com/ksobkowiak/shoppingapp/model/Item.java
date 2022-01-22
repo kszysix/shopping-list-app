@@ -1,37 +1,33 @@
 package com.ksobkowiak.shoppingapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
+@Table(name = "item")
 public class Item {
 
     @Id
     @GeneratedValue
     private long id;
     private String content;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="listId")
+    @ManyToOne
+    @JoinColumn(name = "fk_list")
+    @JsonBackReference
     private ShoppingList shoppingList;
 
-    public Item(String content, ShoppingList shoppingList) {
-        this.shoppingList = shoppingList;
-        this.content = content;
-    }
+    public Item(){}
 
     public Item(String content) {
-        this(content, null);
-    }
-
-    public Item() {
-        this("N/D");
+        this.content = content;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -41,5 +37,13 @@ public class Item {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public ShoppingList getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(ShoppingList shoppingList) {
+        this.shoppingList = shoppingList;
     }
 }
