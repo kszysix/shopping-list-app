@@ -42,7 +42,7 @@
 
   a. Backend - Java + Spring
   
-  b. Frontend - JavaScript + React
+  b. Frontend - JavaScript + Vue
   
   c. Baza danych - Postgres
   
